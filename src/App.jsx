@@ -1,7 +1,17 @@
 import React from "react";
+import Menu from "./componentes/Menu";
+import Produtos from "./pages/Produtos";
+import Home from "./pages/Home";
 
 const App = () => {
-  return <div className="bg-red-400">App react</div>;
+  const { pathname } = window.location;
+  const Pagina = pathname === "/" ? Home : Produtos;
+  return (
+    <>
+      <Menu />
+      <Pagina />
+    </>
+  );
 };
 
 export default App;
