@@ -4,9 +4,15 @@ const produtos = [
   { nome: "Notebook", propriedades: ["16gb ram", "512gb"] },
   { nome: "Smartphone", propriedades: ["2gb ram", "128gb"] },
 ];
+
+function handleScroll(event) {
+  console.log(event);
+}
+window.addEventListener("scroll", handleScroll);
+
 const Produtos = () => {
   return (
-    <div>
+    <div className="">
       <h1 className="mt-10">#Produtos</h1>
       {produtos.map(({ nome, propriedades }) => (
         <div key={nome}>

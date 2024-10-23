@@ -1,16 +1,13 @@
 import React from "react";
-import Menu from "./componentes/Menu";
 import Produtos from "./pages/Produtos";
-import Home from "./pages/Home";
 
 const App = () => {
-  const { pathname } = window.location;
-  const Pagina = pathname === "/" ? Home : Produtos;
+  const [ativo, setAtivo] = React.useState(false);
   return (
-    <>
-      <Menu />
-      <Pagina />
-    </>
+    <div>
+      <button className="bg-slate-500 p-4" onClick={() => setAtivo(!ativo)}></button>
+      {ativo && <Produtos />}
+    </div>
   );
 };
 
