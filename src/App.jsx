@@ -1,7 +1,15 @@
 import React from "react";
+import Produto from "./components/Produto";
+import { GlobalStorage } from "./GlobalContext";
 
 const App = () => {
-  return <div className="bg-red-400">App react</div>;
+  return (
+    <div>
+      <GlobalStorage>
+        <Produto />
+      </GlobalStorage>
+    </div>
+  );
 };
 
 export default App;
