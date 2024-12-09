@@ -13,6 +13,7 @@ const Forms3 = () => {
     cidade: "",
     estado: "",
   });
+  const [response, setResponse] = React.useState(null);
 
   function handleChange({ target }) {
     const { id, value } = target;
@@ -20,14 +21,24 @@ const Forms3 = () => {
   }
   function handleSubmit(event) {
     event.preventDefault();
+    console.log("executou");
+    fetch("https://ranekapi.origamid.dev/json/api/usuario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    }).then((response) => {
+      setResponse(response);
+    });
   }
-
   return (
     <form className="bg-gray-200 p-4" onSubmit={handleSubmit}>
       <main className="flex flex-col gap-5">
         <InputList form={form} handleChange={handleChange} />
         <button className="bg-blue-500 p-2">enviar</button>
       </main>
+      {response && response.ok && <p>Formulário enviado</p>}
     </form>
   );
 };
