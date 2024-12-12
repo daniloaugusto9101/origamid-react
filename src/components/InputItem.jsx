@@ -1,11 +1,15 @@
 import React from "react";
 
-const InputItem = ({ fieldName, type, text, form, handleChange }) => {
+const InputItem = ({ formsFields, handleChange, input }) => {
   return (
-    <div className="flex flex-col">
-      <label htmlFor={fieldName}>{text}</label>
-      <input value={form[fieldName]} type={type} onChange={handleChange} name={fieldName} id={fieldName} className="border border-gray-800" />
-    </div>
+    <>
+      {formsFields.map(({ type, id, label }) => (
+        <div key={id}>
+          <label htmlFor={id}>{label}</label>
+          <input type={type} className="border" id={id} value={input.id} onChange={handleChange} />
+        </div>
+      ))}
+    </>
   );
 };
 

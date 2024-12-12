@@ -1,55 +1,44 @@
 import React from "react";
 import InputItem from "./InputItem";
 
-const data = [
+//Monta o array de objetos com os campos do formulário
+const formsFields = [
   {
-    fieldName: "nome",
     type: "text",
-    text: "Nome",
+    id: "name",
+    label: "Nome",
   },
   {
-    fieldName: "email",
     type: "email",
-    text: "Email",
-  },
-  {
-    fieldName: "senha",
-    type: "password",
-    text: "Senha",
-  },
-  {
-    fieldName: "cep",
-    type: "text",
-    text: "CEP",
-  },
-  {
-    fieldName: "rua",
-    type: "text",
-    text: "Rua",
-  },
-  {
-    fieldName: "numero",
-    type: "text",
-    text: "Número",
-  },
-  {
-    fieldName: "bairro",
-    type: "text",
-    text: "Bairro",
-  },
-  {
-    fieldName: "cidade",
-    type: "text",
-    text: "Cidade",
-  },
-  {
-    fieldName: "estado",
-    type: "text",
-    text: "Estado",
+    id: "email",
+    label: "Email",
   },
 ];
-const InputList = ({ form, handleChange }) => {
-  return data.map((input, idx) => <InputItem key={idx} {...input} form={form} handleChange={handleChange} />);
+
+const InputList = () => {
+  //Monta objeto somente com o id para usar no estado
+  const fields = formsFields.reduce((acc, field) => {
+    return {
+      ...acc,
+      [field.id]: "",
+    };
+  }, {});
+
+  //Monta um estado único com todos os campos do formulário
+  const [input, setInput] = React.useState(fields);
+  console.log(input);
+
+  //Função para atualizar o estado de qualquer campo do formulário
+  function handleChange({ target }) {
+    console.log(target);
+    const { id, value } = target;
+    setInput({ ...input, [id]: value });
+  }
+  return (
+    <>
+      <InputItem formsFields={formsFields} handleChange={handleChange} input={input} />
+    </>
+  );
 };
 
 export default InputList;
