@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Input from "./Input";
+import Textarea from "./Textarea";
+import Select from "./Select";
 
 //Objeto com os campos do formulário
-const formsFields = {
+const formInput = {
   name: {
     id: "name",
     type: "text",
@@ -21,11 +23,35 @@ const formsFields = {
     label: "Idade",
     ico: "FaSearch",
   },
+  desc: {
+    id: "desc",
+    type: "",
+    label: "Descrição",
+    ico: "",
+  },
 };
+
+const formSelect = [
+  {
+    id: "",
+    label: "Selecione",
+    disabled: true,
+  },
+  {
+    id: "fiat",
+    label: "Fiat",
+    disabled: false,
+  },
+  {
+    id: "fusca",
+    label: "Fusca",
+    disabled: false,
+  },
+];
 
 const Form = () => {
   // Monta objeto somente com o id para usar no estado
-  const fields = Object.keys(formsFields).reduce((acc, key) => {
+  const fields = Object.keys(formInput).reduce((acc, key) => {
     return {
       ...acc,
       [key]: "",
@@ -34,7 +60,7 @@ const Form = () => {
 
   // Monta um estado único com todos os campos do formulário
   const [formData, setFormData] = useState(fields);
-  console.log(formData);
+  const [select, setSelect] = React.useState("");
 
   // Função para atualizar o estado de qualquer campo do formulário
   const handleChange = (event) => {
@@ -44,6 +70,11 @@ const Form = () => {
       [name]: value,
     }));
   };
+
+  const onSelect = ({ target }) => {
+    setSelect(target.value);
+  };
+  console.log(select);
   return (
     <form className="p-6 rounded-lg shadow-md flex flex-col items-center gap-4 bg-slate-200 max-w-[720px]">
       <div>
@@ -51,15 +82,25 @@ const Form = () => {
       </div>
       <div className="grid grid-cols-12 gap-4">
         <div className=" col-span-6">
-          <Input {...formsFields.name} value={formData.name} onChange={handleChange} />
+          <Input {...formInput.name} value={formData.name} onChange={handleChange} />
         </div>
       </div>
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-6">
-          <Input {...formsFields.email} value={formData.email} onChange={handleChange} />
+          <Input {...formInput.email} value={formData.email} onChange={handleChange} />
         </div>
         <div className="col-span-6">
-          <Input {...formsFields.idade} value={formData.idade} onChange={handleChange} />
+          <Input {...formInput.idade} value={formData.idade} onChange={handleChange} />
+        </div>
+      </div>
+      <div className="grid grid-cols-12 gap-4">
+        <div className="col-span-12">
+          <Textarea {...formInput.desc} value={formData.desc} onChange={handleChange} />
+        </div>
+      </div>
+      <div className="grid grid-cols-12 gap-4">
+        <div className="col-span-6">
+          <Select formSelect={formSelect} select={select} onSelect={onSelect} />
         </div>
       </div>
     </form>
