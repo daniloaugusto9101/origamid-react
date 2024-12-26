@@ -1,54 +1,54 @@
 import React from "react";
-// import Input from "./Input";
-// import Textarea from "./Textarea";
-// import Select from "./Select";
+import Input from "./Input";
+import Textarea from "./Textarea";
+import Select from "./Select";
 import Radio from "./Radio";
 
 //Objeto com os campos do formulário
-// const formInput = {
-//   name: {
-//     id: "name",
-//     type: "text",
-//     label: "Nome",
-//     ico: "FaBeer",
-//   },
-//   email: {
-//     id: "email",
-//     type: "email",
-//     label: "Email",
-//     ico: "FaSearch",
-//   },
-//   idade: {
-//     id: "idade",
-//     type: "number",
-//     label: "Idade",
-//     ico: "FaSearch",
-//   },
-//   desc: {
-//     id: "desc",
-//     type: "",
-//     label: "Descrição",
-//     ico: "",
-//   },
-// };
+const formInput = {
+  name: {
+    id: "name",
+    type: "text",
+    label: "Nome",
+    ico: "FaBeer",
+  },
+  email: {
+    id: "email",
+    type: "email",
+    label: "Email",
+    ico: "FaSearch",
+  },
+  idade: {
+    id: "idade",
+    type: "number",
+    label: "Idade",
+    ico: "FaSearch",
+  },
+  desc: {
+    id: "desc",
+    type: "",
+    label: "Descrição",
+    ico: "",
+  },
+};
 
-// const formSelect = [
-//   {
-//     id: "",
-//     label: "Selecione",
-//     disabled: true,
-//   },
-//   {
-//     id: "fiat",
-//     label: "Fiat",
-//     disabled: false,
-//   },
-//   {
-//     id: "fusca",
-//     label: "Fusca",
-//     disabled: false,
-//   },
-// ];
+const formSelect = [
+  {
+    id: "",
+    label: "Selecione",
+    disabled: true,
+  },
+  {
+    id: "fiat",
+    label: "Fiat",
+    disabled: false,
+  },
+  {
+    id: "fusca",
+    label: "Fusca",
+    disabled: false,
+  },
+];
 
 const formRadio = [
   {
@@ -65,40 +65,61 @@ const formRadio = [
   },
 ];
 
-const Form = () => {
-  // // Monta objeto somente com o id para usar no estado
-  // const fields = Object.keys(formInput).reduce((acc, key) => {
-  //   return {
-  //     ...acc,
-  //     [key]: "",
-  //   };
-  // }, {});
+const formCheckbox = [
+  {
+    id: "fusca",
+    label: "Fusca",
+    name: "fusca",
+  },
+  {
+    id: "chevet",
+    label: "Chevet",
+    name: "fusca",
+  },
+];
 
-  // // Monta um estado único com todos os campos do formulário
-  // const [formData, setFormData] = useState(fields);
-  // const [select, setSelect] = React.useState("");
+const Form = () => {
+  // Monta objeto somente com o id para usar no estado
+  const fields = Object.keys(formInput).reduce((acc, key) => {
+    return {
+      ...acc,
+      [key]: "",
+    };
+  }, {});
+
+  // Monta um estado único com todos os campos do formulário
+  const [formData, setFormData] = React.useState(fields);
+  const [select, setSelect] = React.useState("");
   const [radio, setRadio] = React.useState(formRadio[1].id);
+  const [checkbox, setCheckbox] = React.useState([]);
 
   // Função para atualizar o estado de qualquer campo do formulário
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-  // const onSelect = ({ target }) => {
-  //   setSelect(target.value);
-  // };
+  const onSelect = ({ target }) => {
+    setSelect(target.value);
+  };
 
   const onRadio = ({ target }) => {
     setRadio(target.value);
   };
+  const onCheckbox = ({ target }) => {
+    if (target.checked) {
+      setCheckbox([...checkbox, target.value]);
+    }else{
+      setCheckbox(checkbox.filter((item) => item !== target.value));
+    }
+  };
 
   return (
     <form className="p-6 rounded-lg shadow-md flex flex-col items-center gap-4 bg-slate-200 max-w-[720px]">
-      {/* <div>
+      <div>
         <h2 className="text-3xl">Cadastro</h2>
       </div>
       <div className="grid grid-cols-12 gap-4">
@@ -123,10 +144,20 @@ const Form = () => {
         <div className="col-span-2">
           <Select formSelect={formSelect} select={select} onSelect={onSelect} />
         </div>
-      </div> */}
+      </div>
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2">
           <Radio formRadio={formRadio} onRadio={onRadio} radio={radio} />
+        </div>
+      </div>
+      <div className="grid grid-cols-12 gap-4">
+        <div className="col-span-2">
+          {formCheckbox.map((item) => (
+            <div key={item.id}>
+              <label htmlFor={item.id}>{item.label}</label>
+              <input type="checkbox" name={item.name} id={item.id} checked={checkbox.includes()} value={item.name} onChange={onCheckbox} />
+            </div>
+          ))}
         </div>
       </div>
     </form>
