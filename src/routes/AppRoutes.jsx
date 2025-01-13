@@ -7,6 +7,7 @@ import Cadastro from "../pages/Cadastro";
 import Compras from "../pages/Compras";
 import FormValidate from "../components/FormValidate/FormValidate";
 import PageHookState from "../pages/PageHookState";
+import PageHookEffect from "../pages/PageHookEffect";
 
 const AppRoutes = () => {
   return (
@@ -19,6 +20,7 @@ const AppRoutes = () => {
         <Route path="/compras" element={<Compras />} />
         <Route path="/formValidate" element={<FormValidate />} />
         <Route path="/pageHookState" element={<PageHookState />} />
+        <Route path="/pageHookEffect" element={<PageHookEffect />} />
       </Routes>
     </Router>
   );
