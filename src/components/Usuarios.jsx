@@ -3,7 +3,6 @@ import { GlobalContext } from "../contexts/GlobalContext";
 
 const Usuarios = () => {
   const { count, setCount, user } = React.useContext(GlobalContext);
-  console.log(user);
   return (
     <div>
       <p>Nome: {user.name}</p>
