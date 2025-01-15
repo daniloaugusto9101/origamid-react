@@ -8,6 +8,7 @@ import Compras from "../pages/Compras";
 import FormValidate from "../components/FormValidate/FormValidate";
 import PageHookState from "../pages/PageHookState";
 import PageHookEffect from "../pages/PageHookEffect";
+import PageHookContext from "../pages/PageHookContext";
 
 const AppRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const AppRoutes = () => {
         <Route path="/formValidate" element={<FormValidate />} />
         <Route path="/pageHookState" element={<PageHookState />} />
         <Route path="/pageHookEffect" element={<PageHookEffect />} />
+        <Route path="/pageHookContext" element={<PageHookContext />} />
       </Routes>
     </Router>
   );
