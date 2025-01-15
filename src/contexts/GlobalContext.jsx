@@ -13,5 +13,5 @@ export const GlobalStorage = ({ children }) => {
   }, []);
 
   const user = { name: "Lucas", idade: 26 };
-  return <GlobalContext.Provider value={{ produtos }}>{children}</GlobalContext.Provider>;
+  return <GlobalContext.Provider value={{ count, setCount, user, produtos }}>{children}</GlobalContext.Provider>;
 };
