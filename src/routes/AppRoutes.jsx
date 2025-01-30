@@ -9,6 +9,8 @@ import FormValidate from "../components/FormValidate/FormValidate";
 import PageHookState from "../pages/PageHookState";
 import PageHookEffect from "../pages/PageHookEffect";
 import PageHookContext from "../pages/PageHookContext";
+import PageCustomHook from "../pages/PageCustomHook";
+import PageDesafioFormulario from "../pages/PageDesafioFormulario";
 
 const AppRoutes = () => {
   return (
@@ -23,6 +25,8 @@ const AppRoutes = () => {
         <Route path="/pageHookState" element={<PageHookState />} />
         <Route path="/pageHookEffect" element={<PageHookEffect />} />
         <Route path="/pageHookContext" element={<PageHookContext />} />
+        <Route path="/pageCustomHook" element={<PageCustomHook />} />
+        <Route path="/pageDesafioFormulario" element={<PageDesafioFormulario />} />
       </Routes>
     </Router>
   );
